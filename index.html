@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untuk Kamu 💖</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3, #fad0c4);
+      background-size: 300% 300%;
+      animation: bgMove 8s ease infinite;
+      overflow: hidden;
+    }
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .card {
+      background: #ffffffee;
+      padding: 30px 26px;
+      border-radius: 22px;
+      max-width: 460px;
+      width: 94%;
+      text-align: center;
+      box-shadow: 0 25px 45px rgba(0,0,0,.18);
+      animation: pop 0.8s ease;
+    }
+    @keyframes pop {
+      from { transform: scale(.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.9rem;
+      color: #e2557a;
+    }
+    p {
+      color: #444;
+      line-height: 1.65;
+      font-size: 1.05rem;
+    }
+    .name {
+      color: #ff5a8a;
+      font-weight: bold;
+    }
+    .btns {
+      margin-top: 22px;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .yes {
+      background: #ff5a8a;
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(255,90,138,.35);
+    }
+    .yes:hover { transform: translateY(-2px); box-shadow: 0 14px 26px rgba(255,90,138,.45); }
+    .no {
+      background: #f0f0f0;
+      color: #555;
+    }
+    .no:hover { background: #e6e6e6; }
+    .footer {
+      margin-top: 16px;
+      font-size: .85rem;
+      color: #777;
+    }
+    .heart {
+      position: absolute;
+      color: #ff5a8a;
+      animation: float 6s linear infinite;
+      opacity: .85;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(.6); opacity: .7; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgm" loop>
+    <!-- Letakkan file lagu hasil mashup di folder yang sama dengan index.html -->
+    <!-- Nama file disarankan: cardigan_x_wannabeyours.mp3 -->
+    <source src="ssstik.io_1769608635953.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    <h1>Hai <span class="name" id="herName">Kamu</span> 🤍</h1>
+    <p id="message">
+      Aku menulis ini dengan perasaan yang tulus. Sejujurnya, setiap kali aku
+      mengingatmu, ada rasa hangat yang sulit dijelaskan. Aku tidak ingin
+      memaksakan apa pun, aku hanya ingin jujur tentang apa yang aku rasakan.
+    </p>
+    <div class="btns">
+      <button class="yes" onclick="sayYes()">Aku Mau Mengenalmu Lebih Dekat 💕</button>
+      <button class="no" onclick="sayNo()">Kita Tetap Teman 🤍</button>
+    </div>
+    <div class="footer">Dibuat khusus untukmu ✨</div>
+  </div>
+
+  <script>
+    const nameInput = prompt("Masukkan nama dia:");
+    if (nameInput) {
+      document.getElementById('herName').textContent = nameInput;
+    }
+
+    const music = document.getElementById('bgm');
+    document.body.addEventListener('click', () => {
+      music.play().catch(() => {});
+    }, { once: true });
+
+    const messages = {
+      yes: "Terima kasih sudah membuka hatimu. Aku akan menjaga perasaan ini dengan penuh rasa hormat dan ketulusan. 🌸",
+      no: "Terima kasih atas kejujuranmu. Aku tetap menghargai kamu dan semua kenangan baik kita. 🌼"
+    };
+
+    function sayYes() {
+      document.getElementById('message').textContent = messages.yes;
+      spawnHearts(40);
+    }
+
+    function sayNo() {
+      document.getElementById('message').textContent = messages.no;
+      spawnHearts(15);
+    }
+
+    function spawnHearts(count) {
+      for (let i = 0; i < count; i++) {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.textContent = '❤';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDuration = (3 + Math.random() * 4) + 's';
+        h.style.fontSize = (14 + Math.random() * 20) + 'px';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 7000);
+      }
+    }
+  </script>
+</body>
+</html>
